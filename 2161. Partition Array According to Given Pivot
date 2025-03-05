@@ -1,3 +1,8 @@
+
+Question link:- https://leetcode.com/problems/partition-array-according-to-given-pivot/description/?envType=daily-question&envId=2025-03-03
+
+Video link:- https://www.youtube.com/watch?v=dnXQ1F6SbZY&list=PLDvvnZJ6HagstUFdfY1B1iOnbRkKkQvoV&index=2&t=429s&pp=gAQBiAQB
+
 class Solution {
 public:
     vector<int> pivotArray(vector<int>& nums, int pivot) {
