@@ -1,3 +1,8 @@
+
+Question link:- https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/?envType=daily-question&envId=2025-03-02
+
+Video link:- https://www.youtube.com/watch?v=PRVv16o7A7U&list=PLDvvnZJ6HagstUFdfY1B1iOnbRkKkQvoV&index=3&t=250s&pp=gAQBiAQB
+
 class Solution {
 public:
     void put(vector<vector<int>>& nums, vector<int>& arr){
