@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void put(vector<vector<int>>& nums, vector<int>& arr){
+        for(auto it : nums){
+            int idx = it[0]-1;
+            int val = it[1];
+            arr[idx] += val;
+        }
+    }
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+        vector<int> arr(1000, 0);
+        put(nums1, arr);
+        put(nums2, arr);
+        vector<vector<int>> ans;
+        for(int i=0; i<1000; i++){
+            int idx = i+1;
+            int val = arr[i];
+            if(val != 0){
+                ans.push_back({idx, val});
+            }
+        }
+        return ans;
+    }
+};
