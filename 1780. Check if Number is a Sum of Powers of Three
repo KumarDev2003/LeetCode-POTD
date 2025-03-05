@@ -1,3 +1,8 @@
+
+Question link:- https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/description/?envType=daily-question&envId=2025-03-04
+
+Video link:- https://www.youtube.com/watch?v=6PW_-LhEZ8s&list=PLDvvnZJ6HagstUFdfY1B1iOnbRkKkQvoV&index=1&pp=gAQBiAQB
+
 class Solution {
 public:
     bool fun(unsigned long long num, unsigned long long p, unsigned long long& lim, int target){
