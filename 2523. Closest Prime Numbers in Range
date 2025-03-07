@@ -3,6 +3,8 @@ Question link:- https://leetcode.com/problems/closest-prime-numbers-in-range/des
 
 Video link:- https://youtu.be/Aa_RqXLVxaQ
 
+Sieve of Eratosthenes:- https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html
+
 class Solution {
 public:
     vector<bool> prime;
