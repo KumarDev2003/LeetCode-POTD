@@ -1,0 +1,59 @@
+
+Question link:- https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/description/?envType=daily-question&envId=2025-03-10
+
+Video link:- https://youtu.be/2_UKWVtcGYg
+
+class Solution {
+public:
+    bool vowel(char ch){
+        return ch == 'a' || ch == 'i' || ch == 'e' || ch == 'o' || ch == 'u';
+    }
+    long long countOfSubstrings(string word, int k) {
+        int n = word.size();
+        vector<int> next(n, n);
+        int last = -1;
+        for(int i=n-1; i>=0; i--){
+            char ch = word[i];
+            if(last != -1) next[i] = last;
+            if(!vowel(ch)){
+                last = i;
+            }
+        }
+        unordered_map<char, int> mp;
+        long long cnt = 0;
+        long long ans = 0;
+        int i = 0;
+        int j = 0;
+        while(j < n){
+            char ch = word[j];
+            if(vowel(ch)){
+                mp[ch]++;
+            }else{
+                cnt++;
+            }
+            while(cnt > k){
+                char new_ch = word[i];
+                if(vowel(new_ch)){
+                    mp[new_ch]--;
+                    if(mp[new_ch] <= 0) mp.erase(new_ch);
+                }else{
+                    cnt--;
+                }
+                i++;
+            }
+            while(mp.size() == 5 && cnt == k){
+                ans = (long long) ans + (next[j] - j);
+                char new_ch = word[i];
+                if(vowel(new_ch)){
+                    mp[new_ch]--;
+                    if(mp[new_ch] <= 0) mp.erase(new_ch);
+                }else{
+                    cnt--;
+                }
+                i++;
+            }
+            j++;
+        }
+        return ans;
+    }
+};
