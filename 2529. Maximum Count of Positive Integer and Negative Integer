@@ -1,0 +1,19 @@
+
+Question link:- https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/description/?envType=daily-question&envId=2025-03-12
+
+Video link:- https://youtu.be/LUrCHaGrsCw
+
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+      int n = nums.size();
+      int pos = 0;
+      int neg = 0;
+      int i = 0;  
+      while(i < n && nums[i] <= 0){
+        if(nums[i] < 0) neg++;
+        i++;
+      } 
+      return max(neg, n-i);
+    }
+};
