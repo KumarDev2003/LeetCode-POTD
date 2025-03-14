@@ -1,0 +1,34 @@
+
+Question link:- https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/?envType=daily-question&envId=2025-03-14
+
+Video link:- https://youtu.be/l9vg8QIPz_Y
+
+class Solution {
+public:
+    bool valid(int mid, vector<int>& candies, long long& k){
+        long long cnt = 0;
+        for(auto it : candies){
+            cnt += (it/mid);
+        }
+        return cnt >= k;
+    }
+    int maximumCandies(vector<int>& candies, long long k) {
+        int n = candies.size();
+        int l = 1;
+        int h = INT_MIN;
+        for(auto it : candies){
+            h = max(h, it);
+        } 
+        int ans = 0;
+        while(l <= h){
+            int mid = (l+h)/2;
+            if(valid(mid, candies, k)){
+                ans = mid;
+                l = mid+1;
+            }else{
+                h = mid-1;
+            }
+        }
+        return ans;
+    }
+};
