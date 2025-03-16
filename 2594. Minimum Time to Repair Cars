@@ -1,0 +1,37 @@
+Question link:- https://leetcode.com/problems/minimum-time-to-repair-cars/description/
+
+Video link:- Coming Soon...
+
+class Solution {
+public:
+    bool valid(vector<int>& ranks, int cars, long long mid){
+        long long cnt = 0;
+        for(auto it : ranks){
+            cnt = cnt + sqrt(mid/it);
+            if(cnt >= cars) return true;
+        }
+        return cnt >= cars;
+    }
+    long long repairCars(vector<int>& ranks, int cars) {
+        long long n = ranks.size();
+        long long h = LONG_MAX;
+        for(auto it : ranks){
+            if(it < h){
+                h = it;
+            }
+        }
+        h = (long long) (h * cars * cars); 
+        long long l = 1;
+        long long ans = 0;
+        while(l <= h){
+            long long mid = (l+h)/2;
+            if(valid(ranks, cars, mid)){
+                ans = mid;
+                h = mid-1;
+            }else{
+                l = mid+1;
+            }
+        }
+        return ans;
+    }
+};
