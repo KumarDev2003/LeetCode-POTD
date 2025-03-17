@@ -1,0 +1,17 @@
+Question link:- https://leetcode.com/problems/divide-array-into-equal-pairs/description/
+
+Video link:- https://youtu.be/rC9wOZEN3Nc
+
+class Solution {
+public:
+    bool divideArray(vector<int>& nums) {
+        vector<int> arr(501, 0);
+        for(auto it : nums){
+            arr[it] += 1;
+        }
+        for(int i=1; i<501; i++){
+            if(arr[i] % 2 == 1) return false;
+        }
+        return true;
+    }
+};
