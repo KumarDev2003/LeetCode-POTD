@@ -1,0 +1,27 @@
+Question link:- https://leetcode.com/problems/longest-nice-subarray/description/?envType=daily-question&envId=2025-03-18
+
+Video link:- Coming soon...
+
+class Solution {
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int n = nums.size();
+        int cnt = 1;
+        int max_cnt = 1;
+        long long mask = nums[0];
+        int i = 1;
+        int j = 0;
+        while(i < n){
+            while(j < n && (mask & nums[i]) != 0){
+                mask ^= nums[j];
+                cnt--;
+                j++;
+            }
+            mask ^= nums[i];
+            cnt++;
+            max_cnt = max(max_cnt, cnt);
+            i++;
+        }
+        return max_cnt;
+    }
+};
