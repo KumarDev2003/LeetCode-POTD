@@ -1,0 +1,35 @@
+Question link:- https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/?envType=daily-question&envId=2025-03-21
+
+Video link:- Coming soon...
+
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        unordered_set<string> st;
+        for(auto it : supplies){
+            st.insert(it);
+        }
+        int n = recipes.size();
+        vector<bool> made(n, false);
+        vector<string> ans;
+        for(int k=0; k<n; k++){
+            for(int i=0; i<n; i++){
+                if(made[i]) continue;
+                vector<string> arr = ingredients[i];
+                bool b = true;
+                for(auto it : arr){
+                    if(st.find(it) == st.end()){
+                        b = false;
+                        break;
+                    }
+                }
+                if(b){
+                    st.insert(recipes[i]);
+                    made[i] = true;
+                    ans.push_back(recipes[i]);
+                }
+            }
+        }
+        return ans;
+    }
+};
