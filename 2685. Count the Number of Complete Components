@@ -1,0 +1,74 @@
+Question link:- https://leetcode.com/problems/count-the-number-of-complete-components/description/
+
+Video link:- Coming Soon...
+
+class DSU{
+    public:
+    vector<int> parent;
+    vector<int> cnt;
+    vector<int> rank;
+    DSU(int n){
+        parent.resize(n);
+        cnt.resize(n);
+        rank.resize(n);
+        for(int i=0; i<n; i++){
+            parent[i] = i;
+        }
+    }
+    int find(int u){
+        if(u == parent[u]){
+            return u;
+        }
+        return parent[u] = find(parent[u]);
+    }
+    void insert(int u, int v){
+        int pu = find(u);
+        int pv = find(v);
+        if(pv == pu){
+            cnt[pu] = cnt[pu] + 1;
+            return;
+        }
+        if(rank[pu] == rank[pv]){
+            parent[pv] = pu;
+            cnt[pu] = cnt[pu] + cnt[pv] + 1;
+            rank[pu]++;
+        }else if(rank[pu] > rank[pv]){
+            parent[pv] = pu;
+            cnt[pu] = cnt[pu] + cnt[pv] + 1;
+        }else{
+            parent[pu] = pv;
+            cnt[pv] = cnt[pu] + cnt[pv] + 1;
+        }
+    }
+};
+class Solution {
+public:
+    int countCompleteComponents(int n, vector<vector<int>>& edges) {
+        DSU d(n);
+        for(auto it : edges){
+            int u = it[0];
+            int v = it[1];
+            d.insert(u, v);
+        }
+        for(auto& it : d.parent){
+            it = d.find(it);
+        }
+        unordered_map<int, int> mp;
+        for(int i=0; i<n; i++){
+            mp[d.parent[i]]++;
+        }
+        int cnt = 0;
+        for(auto it : mp){
+            int u = it.first;
+            int e = it.second;
+            int no = 0;
+            if(e > 1){
+                no = (e-1) * (e)/2;
+            }
+            if(no == d.cnt[u]){
+                cnt++; 
+            }
+        }
+        return cnt;
+    }
+};
