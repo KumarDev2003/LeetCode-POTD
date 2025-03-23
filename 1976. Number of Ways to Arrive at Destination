@@ -1,0 +1,46 @@
+Question link:- https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/?envType=daily-question&envId=2025-03-23
+
+Video link:- https://youtu.be/wfscr5CCSsg
+
+class Solution {
+public:
+    int mod = (int) 1e9+7;
+    void bfs(vector<vector<pair<long long, long long>>>& adj, vector<long long>& result, vector<long long>& cnt){
+        priority_queue<pair<long long, long long>, vector<pair<long long, long long>>, greater<pair<long long, long long>>> q;
+        q.push({0, 0});
+        while(!q.empty()){
+            auto el = q.top();
+            q.pop();
+            long long wt = el.first;
+            long long u = el.second;
+            for(auto it : adj[u]){
+                long long v = it.first;
+                long long cost = it.second;
+                long long curr_cost = wt + cost;
+                if(result[v] > curr_cost){
+                    result[v] = curr_cost;
+                    q.push({curr_cost, v});
+                    cnt[v] = cnt[u];
+                }else if(curr_cost == result[v]){
+                    cnt[v] = (cnt[v] + cnt[u])%mod;
+                }
+            }
+        }
+    }
+    int countPaths(int n, vector<vector<int>>& roads) {
+        vector<vector<pair<long long, long long>>> adj(n);
+        for(auto& it : roads){
+            int u = it[0];
+            int v = it[1];
+            int wt = it[2];
+            adj[u].push_back({v, wt});
+            adj[v].push_back({u, wt});
+        }
+        vector<long long> result(n, LLONG_MAX);
+        vector<long long> cnt(n, 0);
+        result[0] = 0;
+        cnt[0] = 1;
+        bfs(adj, result, cnt);
+        return cnt[n-1];
+    }
+};
