@@ -1,5 +1,7 @@
 Question link:- https://leetcode.com/problems/count-days-without-meetings/description/
 
+Video link:- Coming soon...
+
 class Solution {
 public:
     int countDays(int days, vector<vector<int>>& meetings) {
@@ -23,7 +25,6 @@ public:
         int cnt = 0;
         while(i < n){
             while(el < arr[i].first){
-                cout<<el;
                 el++;
                 cnt++;
             }
