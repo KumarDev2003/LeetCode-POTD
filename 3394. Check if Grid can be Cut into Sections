@@ -1,5 +1,7 @@
 Question link:- https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/description/
 
+Video link:- https://youtu.be/8DKd0SPO_X0
+
 class Solution {
 public:
     bool valid(vector<pair<int, int>>& arr){
