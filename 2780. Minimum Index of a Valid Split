@@ -1,0 +1,25 @@
+Quesion link:- https://leetcode.com/problems/minimum-index-of-a-valid-split/description/
+
+Video link:- Coming soon...
+
+class Solution {
+public:
+    int minimumIndex(vector<int>& nums) {
+        unordered_map<int, int> tot;
+        unordered_map<int, int> curr;
+        for(const auto & it : nums){
+            tot[it]++;
+        }
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            int el = nums[i];
+            curr[el]++; 
+            int l = i+1;
+            int r = n-i-1;
+            if(curr[el]*2 > l && (tot[el]-curr[el])*2 > r){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
