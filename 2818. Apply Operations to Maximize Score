@@ -1,6 +1,6 @@
 Question link:- https://leetcode.com/problems/apply-operations-to-maximize-score/
 
-Vide link:- Coming soon...
+Vide link:- https://youtu.be/Zosc2Br_lXg
 
 struct Compare {
     bool operator()(const vector<long long>& a, const vector<long long>& b) const {
