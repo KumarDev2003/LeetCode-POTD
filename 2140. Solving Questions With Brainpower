@@ -1,0 +1,19 @@
+Question link:- https://leetcode.com/problems/solving-questions-with-brainpower/description/
+
+Video link:- https://youtu.be/jcCycISo4tk
+
+class Solution {
+public:
+    long long fun(int i, vector<vector<int>>& questions, long long& n, vector<long long>& dp){
+        if(i >= n) return 0;
+        if(dp[i] != -1) return dp[i];
+        long long p = questions[i][0] + fun(i + questions[i][1] + 1, questions, n, dp);
+        long long np = 0 + fun(i+1, questions, n, dp);
+        return dp[i] = max(p, np);
+    }
+    long long mostPoints(vector<vector<int>>& questions) {
+        long long n = questions.size();
+        vector<long long> dp(n, -1);
+        return fun(0, questions, n, dp);
+    }
+};
