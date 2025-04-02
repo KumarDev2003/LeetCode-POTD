@@ -1,5 +1,7 @@
 Question link:- https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/description/?envType=daily-question&envId=2025-04-02
 
+Video link:- https://youtu.be/wjX0GEfSP3U
+
 class Solution {
 public:
     long long maximumTripletValue(vector<int>& nums) {
