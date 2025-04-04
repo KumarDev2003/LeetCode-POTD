@@ -1,0 +1,47 @@
+Question link:- https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/?envType=daily-question&envId=2025-04-04
+
+Video link:- Coming soon...
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int max_lvl = 0;
+    bool help(vector<TreeNode*>& arr, unordered_map<TreeNode*, TreeNode*>& parent, TreeNode*& ans){
+        for(auto & it : arr){
+            it = parent[it];
+        }
+        for(int i=1; i<arr.size(); i++){
+            if(arr[i] != arr[i-1]) return false;
+        }
+        ans = arr[0];
+        return true;
+    }
+    void fun(TreeNode* root, int lvl, TreeNode* par, unordered_map<int, vector<TreeNode*>>& mp, unordered_map<TreeNode*, TreeNode*>& parent){
+        if(root == nullptr) return;
+        mp[lvl].push_back(root);
+        parent[root] = par;
+        max_lvl = max(max_lvl, lvl);
+        fun(root->left, lvl+1, root, mp, parent);
+        fun(root->right, lvl+1, root, mp, parent);
+    }
+    TreeNode* lcaDeepestLeaves(TreeNode* root) {
+        unordered_map<TreeNode*, TreeNode*> parent;
+        unordered_map<int, vector<TreeNode*>> mp;
+        fun(root, 0, root, mp, parent);
+        vector<TreeNode*>& arr = mp[max_lvl];
+        if(arr.size() == 1) return arr[0];
+        TreeNode* ans = nullptr;
+        while(help(arr, parent, ans) == false){ }
+        return ans;
+    }
+};
