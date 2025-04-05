@@ -1,0 +1,41 @@
+Question link:- https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/?envType=daily-question&envId=2025-04-05
+
+Video link:- https://youtu.be/6SmXH7jSlc8
+
+Approach 1:-
+
+class Solution {
+public:
+    void function(int i, vector<int>& nums, int x, int& sum){
+        if(i == nums.size()){
+            sum += x;
+            return;
+        }
+        function(i+1, nums, x^nums[i], sum);
+        function(i+1, nums, x, sum);
+    }
+    int subsetXORSum(vector<int>& nums) {
+        int sum = 0;
+        function(0, nums, 0, sum);
+        return sum;
+    }
+};
+
+Approach 2:- 
+
+class Solution {
+public:
+    void function(int i, vector<int>& nums, int x, int& sum){
+        if(i == nums.size()){
+            sum += x;
+            return;
+        }
+        function(i+1, nums, x^nums[i], sum);
+        function(i+1, nums, x, sum);
+    }
+    int subsetXORSum(vector<int>& nums) {
+        int sum = 0;
+        function(0, nums, 0, sum);
+        return sum;
+    }
+};
