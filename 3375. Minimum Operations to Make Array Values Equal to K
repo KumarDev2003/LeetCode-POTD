@@ -1,0 +1,42 @@
+Question link:- https://leetcode.com/problems/minimum-operations-to-make-array-values-equal-to-k/description/?envType=daily-question&envId=2025-04-09
+
+Video link:- https://youtu.be/Mfr3PbXtzXM
+
+Approach 1 :-
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        set<int> st;
+        for(const auto & it : nums) st.insert(it);
+        int t = 1;
+        int mini;
+        for(const auto & it : st){
+            if(t == 0) break;
+            mini = it;
+            t--;
+        }
+        if(mini < k) return -1;
+        if(mini == k) return st.size()-1;
+        return st.size();
+    }
+};
+
+Approach 2 :- 
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        vector<int> arr(101, 0);
+        int mini = INT_MAX;
+        int cnt = 0;
+        for(const auto & it : nums){
+            mini = min(it, mini);
+            if(arr[it] == 0) cnt++;
+            arr[it]++;
+        }
+        if(mini < k) return -1;
+        if(mini == k) return cnt-1;
+        return cnt;
+    }
+};
