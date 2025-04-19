@@ -1,0 +1,48 @@
+Question link:- https://leetcode.com/problems/count-the-number-of-fair-pairs/description/
+
+class Solution {
+public:
+    int bs1(int high, vector<int>& nums, int& x, int& lower, int& upper){
+        int low = 0;
+        int ans = INT_MIN;
+        while(low <= high){
+            int mid = (low+high)/2;
+            int sum = nums[mid] + x;
+            if(sum <= upper){
+                low = mid+1;
+                ans = mid;
+            }else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+    int bs2(int high, vector<int>& nums, int& x, int& lower, int& upper){
+        int low = 0;
+        int ans = INT_MIN;
+        while(low <= high){
+            int mid = (low+high)/2;
+            int sum = nums[mid] + x;
+            if(lower <= sum){
+                high = mid-1;
+                ans = mid;
+            }else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        int n = nums.size();
+        long long cnt = 0;
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<n; i++){
+            int idx1 = bs1(i-1, nums, nums[i], lower, upper);
+            int idx2 = bs2(i-1, nums, nums[i], lower, upper);
+            if(idx1 == INT_MIN || idx2 == INT_MIN) continue;
+            else cnt += (idx1 - idx2 + 1);
+        }
+        return cnt;
+    }
+};
+
