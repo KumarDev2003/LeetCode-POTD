@@ -1,0 +1,17 @@
+Question link:- https://leetcode.com/problems/rabbits-in-forest/description/?envType=daily-question&envId=2025-04-20
+
+class Solution {
+public:
+    int numRabbits(vector<int>& answers) {
+        unordered_map<int, int> mp;
+        for(const auto & it : answers) mp[it]++;
+        int sum = 0;
+        for( auto it : mp){
+            int first = it.first;
+            int second = it.second;
+            first++;
+            sum += ceil((double)second/first) * first;
+        }
+        return sum;
+    }
+};
