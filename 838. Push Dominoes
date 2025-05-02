@@ -1,0 +1,43 @@
+Question:- https://leetcode.com/problems/push-dominoes/description/
+
+class Solution {
+public:
+    string pushDominoes(string dominoes) {
+        int n = dominoes.size();
+        vector<int> r(n, 0);
+        vector<int> l(n, 0);
+        int i = 0;
+        while(i < n){
+            if(dominoes[i] == 'R'){
+                r[i] = 1;
+                i++;
+                while(i < n && dominoes[i] == '.'){
+                    r[i] += r[i-1] + 1;
+                    i++;
+                }
+            }else{
+                i++;
+            }
+        }
+        i = n-1;
+        while(i >= 0){
+            if(dominoes[i] == 'L'){
+                l[i] = 1;
+                i--;
+                while(i >= 0 && dominoes[i] == '.'){
+                    l[i] += l[i+1] + 1;
+                    i--;
+                }
+            }else{
+                i--;
+            }
+        }
+        string s = "";
+        for(int i=0; i<n; i++){
+            if(r[i] == l[i]) s += '.';
+            else if((l[i] == 0 && r[i] != 0) || (l[i] != 0 && r[i] != 0 && l[i] > r[i])) s += 'R';
+            else s += 'L';
+        }
+        return s;
+    }
+};
